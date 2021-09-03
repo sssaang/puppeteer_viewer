@@ -4,6 +4,7 @@ const r = require('@mozilla/readability')
 const jsdom = require('jsdom')
 const genericPool = require('generic-pool')
 const { JSDOM } = jsdom
+const app = express()
 
 let myPool
 let browser
@@ -42,24 +43,8 @@ const init = async () => {
   }
   myPool = genericPool.createPool(factory(browser), opts)
 }
-init()
-const app = express()
-// let browser
-let browserWSEndpoint
-// const createBrowser = async () => {
-//   try {
-//     const browser = await puppeteer.launch({
-//       args: ['--no-sandbox', '--disable-setuid-sandbox']
-//     })
-//     browserWSEndpoint = browser.wsEndpoint()
-//   } catch (err) {
-//     console.log(err)
-//   } finally {
-//     console.log(browserWSEndpoint)
-//   }
-// }
 
-// createBrowser()
+init()
 
 app.get('/', async (req, res) => {
   try {
